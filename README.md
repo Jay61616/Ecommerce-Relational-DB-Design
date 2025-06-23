@@ -59,20 +59,17 @@ ecommerce-relational-db-design/
 ## 💻 How to Use
 
 1. **Load the schema**
-   ```sql
-   @schema/create_tables.sql
-Create stored procedures
-
-
-@procedures/insert_procedures.sql
-@procedures/update_procedures.sql
-Insert sample data
-
-
-@data/insert_values.sql
-Run business queries
-
-@queries/aspect_queries.sql
+   [Create Tables](schema/create_tables.sql)
+   
+3. Create stored procedures
+   [Insert Procedures](procedures/insert_procedures.sql)
+   [Insert Procedures](procedures/update_procedures.sql)
+   
+5. Insert sample data
+   [Insert Values](data/insert_values.sql)
+   
+7. Run business queries
+   [Aspect Queries](queries/aspect_queries.sql)
 ⚠️ Note: This project is designed for Oracle SQL/PL-SQL environments (e.g., Oracle SQL Developer, AWS RDS with Oracle engine).
 
 📌 Sample Business Questions Answered
