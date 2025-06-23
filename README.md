@@ -114,6 +114,8 @@ SELECT * FROM products
 WHERE price < 30 AND (category_name = 'Computers' OR category_name = 'Electronics');
 ![2](https://github.com/user-attachments/assets/873b9381-651a-4eca-b2e8-d1a389277f76)
 ```
+![2](https://github.com/user-attachments/assets/3ff6c318-fc54-4e82-80cf-287bffba9666)
+
 ✔️ List the names of products whose inventory count is 11 or less.
 ```sql
 SELECT prod_name FROM products
@@ -121,13 +123,15 @@ JOIN inventory ON products.product_id = inventory.product_id
 WHERE inventory.product_count <= 11;
 ![3](https://github.com/user-attachments/assets/63a436c9-d8c1-453a-9d2e-e1b4e0ee3133)
 ```
+![3](https://github.com/user-attachments/assets/f710cf01-8a23-43fb-b4b2-f25d10def5e7)
+
 ✔️ Find all last names that appear more than 3 times in the person table.
 ```sql
 SELECT lastname, COUNT(*) FROM person
 GROUP BY lastname
 HAVING COUNT(*) > 3;
 ```
-![4](https://github.com/user-attachments/assets/a5d78234-26ee-4c2d-a212-5c92a1d0b842)
+![4](https://github.com/user-attachments/assets/45b46d2a-3af0-4b74-a073-b3dc46f5905d)
 
 ✔️ Retrieve buyer information for orders that include products purchased three or more times.
 ```sql
@@ -143,7 +147,8 @@ WHERE order_id IN (
     )
 );
 ```
-![5](https://github.com/user-attachments/assets/5bfecf03-d721-4541-be27-3a5e55ac4262)
+![5](https://github.com/user-attachments/assets/bacb31d6-01ae-434a-8b3e-d19cbd99e1aa)
+
 
 ✔️ Get shipping details for orders placed by customers with a Prime subscription.
 ```sql
@@ -156,8 +161,7 @@ WHERE shipping_id IN (
     )
 );
 ```
-![6](https://github.com/user-attachments/assets/d9a32d2e-a8ac-4976-964b-fecffe78b59a)
-
+![6](https://github.com/user-attachments/assets/4b07c0cf-c46b-4295-9f4d-c7c07fcb4ac2)
 
 
 ## 👨‍💻 Author
