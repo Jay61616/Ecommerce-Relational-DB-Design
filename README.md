@@ -6,13 +6,40 @@ This project simulates the backend data architecture of an Amazon-like e-commerc
 
 ---
 
+## 🛠️ Technologies Used
+
+![Oracle SQL](https://img.shields.io/badge/SQL-Oracle-blue?logo=oracle)
+![Relational DB](https://img.shields.io/badge/Database-3NF%20Relational%20Model-green)
+![PL/SQL](https://img.shields.io/badge/PL--SQL-Stored%20Procedures-lightgrey)
+![Data Modeling](https://img.shields.io/badge/ERD-Normalized%20Schema-purple)
+
+---
+
 ## ✍️ Overview
 
-The database models a typical online marketplace where:
-- Sellers offer products across various categories
-- Buyers place orders, which are fulfilled through shipping providers
-- Returns and customer service requests are tracked
-- Inventory is managed per seller-product relationship
+The database models a typical online marketplace with the structural business rules:
+- A Seller can sell many products
+- A product is sold by a single seller
+- Each product belongs to a category
+- A product belongs to single category.
+- A category can have many products.
+- Product should have category ID, Name, Price, Quantity.
+- An inventory belongs to single seller.
+- A seller can have a single inventory.
+- A customer can place many orders.
+- An order belongs to a single customer.
+- Customer should have username, address, phone number and email address.
+- An order can have many products.
+- A product belongs to a single order.
+- Order should belong to a particular shipping speed.
+- A return request belongs to one and only customer.
+- A customer can have zero to many return requests.
+- Return request should have Person ID and Product ID.
+- A customer can have zero to many customers service request.
+- A customer service request belongs to one and only one customer.
+- Each order should have a tracking ID.
+- A product list belongs to only one order.
+- A order list has many order to product pairs.
 
 ---
 
@@ -26,20 +53,15 @@ The schema is based on **3rd Normal Form (3NF)** and includes:
 - `orders`, `orders_list`, `shipping`: Order processing and fulfillment
 - `returns`, `customer_service`: Post-order operations
 
+This is viasually represented by the image below:
+![1](https://github.com/user-attachments/assets/59e95a9d-7878-469d-97bd-08612dbd6d6d)
+
 Stored procedures are provided for:
 - Inserting entities (e.g., `ADD_PRODUCTS`, `ADD_PERSON`)
 - Updating status (e.g., `update_orders`, `update_returns`)
 
 ---
 
-## 🛠️ Technologies Used
-
-![Oracle SQL](https://img.shields.io/badge/SQL-Oracle-blue?logo=oracle)
-![Relational DB](https://img.shields.io/badge/Database-3NF%20Relational%20Model-green)
-![PL/SQL](https://img.shields.io/badge/PL--SQL-Stored%20Procedures-lightgrey)
-![Data Modeling](https://img.shields.io/badge/ERD-Normalized%20Schema-purple)
-
----
 
 ## 📁 Folder Structure
 
@@ -70,14 +92,56 @@ ecommerce-relational-db-design/
    
 7. Run business queries
    [Aspect Queries](queries/aspect_queries.sql)
-⚠️ Note: This project is designed for Oracle SQL/PL-SQL environments (e.g., Oracle SQL Developer, AWS RDS with Oracle engine).
+   
+   ⚠️ Note: This project is designed for Oracle SQL/PL-SQL environments (e.g., Oracle SQL Developer, AWS RDS with Oracle engine).
 
 📌 Sample Business Questions Answered
-✔️ What are the products under $30 in Electronics/Computers?
-✔️ Who are the buyers with Prime membership and active orders?
-✔️ Which product categories are most returned?
-✔️ What is the most common customer service issue?
+   This was a school project I answered few sample quetions asked by my professor. These are the questions:
+✔️ Retrieve all products under $30 in either the 'Computers' or 'Electronics' category.
+  <pre>SELECT * FROM products
+WHERE price < 30 AND (category_name = 'Computers' OR category_name = 'Electronics');</pre>
+![2](https://github.com/user-attachments/assets/873b9381-651a-4eca-b2e8-d1a389277f76)
 
-👨‍💻 Author
+✔️ List the names of products whose inventory count is 11 or less.
+<pre>SELECT prod_name FROM products
+JOIN inventory ON products.product_id = inventory.product_id
+WHERE inventory.product_count <= 11;</pre>
+![3](https://github.com/user-attachments/assets/63a436c9-d8c1-453a-9d2e-e1b4e0ee3133)
+
+✔️ Find all last names that appear more than 3 times in the person table.
+<pre>SELECT lastname, COUNT(*) FROM person
+GROUP BY lastname
+HAVING COUNT(*) > 3;</pre>
+![4](https://github.com/user-attachments/assets/a5d78234-26ee-4c2d-a212-5c92a1d0b842)
+
+✔️ Retrieve buyer information for orders that include products purchased three or more times.
+<pre>SELECT orders.person_id, person.firstname, person.lastname, person.address
+FROM orders
+INNER JOIN person ON orders.person_id = person.person_id
+WHERE order_id IN (
+    SELECT order_id FROM orders_list
+    WHERE product_id IN (
+        SELECT product_id FROM orders_list
+        GROUP BY product_id
+        HAVING COUNT(*) >= 3
+    )
+);</pre>
+![5](https://github.com/user-attachments/assets/5bfecf03-d721-4541-be27-3a5e55ac4262)
+
+✔️ Get shipping details for orders placed by customers with a Prime subscription.
+<pre>SELECT shipping_id, status, service_provider FROM shipping
+WHERE shipping_id IN (
+    SELECT shipping_id FROM orders
+    WHERE person_id IN (
+        SELECT person_id FROM buyer
+        WHERE subscription = 'prime'
+    )
+);
+</pre>
+![6](https://github.com/user-attachments/assets/d9a32d2e-a8ac-4976-964b-fecffe78b59a)
+
+
+
+## 👨‍💻 Author
 Jaya Chandra Kadivati
 SQL Developer | Data Engineering Enthusiast
