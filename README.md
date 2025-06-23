@@ -103,7 +103,7 @@ ecommerce-relational-db-design/
 7. Run business queries
    [Aspect Queries](queries/aspect_queries.sql)
    
-   ⚠️ Note: This project is designed for Oracle SQL/PL-SQL environments (e.g., Oracle SQL Developer, AWS RDS with Oracle engine).
+⚠️ Note: This project is designed for Oracle SQL/PL-SQL environments (e.g., Oracle SQL Developer, AWS RDS with Oracle engine).
 
 📌 Sample Business Questions Answered
    This was a school project I answered few sample quetions asked by my professor. These are the questions:
@@ -163,4 +163,5 @@ WHERE shipping_id IN (
 ## 👨‍💻 Author
 
 Jaya Chandra Kadivati
+
 SQL Developer | Data Engineering Enthusiast
