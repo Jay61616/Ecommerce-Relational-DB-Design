@@ -66,15 +66,25 @@ Stored procedures are provided for:
 ## 📁 Folder Structure
 
 ecommerce-relational-db-design/
+
 ├── schema/
+
 │ └── create_tables.sql # All CREATE TABLE statements
+
 ├── procedures/
+
 │ ├── insert_procedures.sql # Stored procedures to insert data
+
 │ └── update_procedures.sql # Stored procedures to update records
+
 ├── data/
+
 │ └── insert_values.sql # Sample data loaded using procedures
+
 ├── queries/
+
 │ └── aspect_queries.sql # Business insight queries with context
+
 └── README.md # You're reading it 🙂
 
 
@@ -97,25 +107,31 @@ ecommerce-relational-db-design/
 
 📌 Sample Business Questions Answered
    This was a school project I answered few sample quetions asked by my professor. These are the questions:
+
 ✔️ Retrieve all products under $30 in either the 'Computers' or 'Electronics' category.
-  <pre>SELECT * FROM products
-WHERE price < 30 AND (category_name = 'Computers' OR category_name = 'Electronics');</pre>
+  ```sql
+SELECT * FROM products
+WHERE price < 30 AND (category_name = 'Computers' OR category_name = 'Electronics');
 ![2](https://github.com/user-attachments/assets/873b9381-651a-4eca-b2e8-d1a389277f76)
-
+```
 ✔️ List the names of products whose inventory count is 11 or less.
-<pre>SELECT prod_name FROM products
+```sql
+SELECT prod_name FROM products
 JOIN inventory ON products.product_id = inventory.product_id
-WHERE inventory.product_count <= 11;</pre>
+WHERE inventory.product_count <= 11;
 ![3](https://github.com/user-attachments/assets/63a436c9-d8c1-453a-9d2e-e1b4e0ee3133)
-
+```
 ✔️ Find all last names that appear more than 3 times in the person table.
-<pre>SELECT lastname, COUNT(*) FROM person
+```sql
+SELECT lastname, COUNT(*) FROM person
 GROUP BY lastname
-HAVING COUNT(*) > 3;</pre>
+HAVING COUNT(*) > 3;
+```
 ![4](https://github.com/user-attachments/assets/a5d78234-26ee-4c2d-a212-5c92a1d0b842)
 
 ✔️ Retrieve buyer information for orders that include products purchased three or more times.
-<pre>SELECT orders.person_id, person.firstname, person.lastname, person.address
+```sql
+SELECT orders.person_id, person.firstname, person.lastname, person.address
 FROM orders
 INNER JOIN person ON orders.person_id = person.person_id
 WHERE order_id IN (
@@ -125,11 +141,13 @@ WHERE order_id IN (
         GROUP BY product_id
         HAVING COUNT(*) >= 3
     )
-);</pre>
+);
+```
 ![5](https://github.com/user-attachments/assets/5bfecf03-d721-4541-be27-3a5e55ac4262)
 
 ✔️ Get shipping details for orders placed by customers with a Prime subscription.
-<pre>SELECT shipping_id, status, service_provider FROM shipping
+```sql
+SELECT shipping_id, status, service_provider FROM shipping
 WHERE shipping_id IN (
     SELECT shipping_id FROM orders
     WHERE person_id IN (
@@ -137,11 +155,12 @@ WHERE shipping_id IN (
         WHERE subscription = 'prime'
     )
 );
-</pre>
+```
 ![6](https://github.com/user-attachments/assets/d9a32d2e-a8ac-4976-964b-fecffe78b59a)
 
 
 
 ## 👨‍💻 Author
+
 Jaya Chandra Kadivati
 SQL Developer | Data Engineering Enthusiast
