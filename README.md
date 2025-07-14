@@ -54,7 +54,7 @@ The schema is based on **3rd Normal Form (3NF)** and includes:
 - `returns`, `customer_service`: Post-order operations
 
 This is viasually represented by the image below:
-![1](https://github.com/user-attachments/assets/59e95a9d-7878-469d-97bd-08612dbd6d6d)
+<img width="2125" height="1428" alt="ERD" src="https://github.com/user-attachments/assets/c65374ca-6702-450a-977f-295ae10fed0f" />
 
 Stored procedures are provided for:
 - Inserting entities (e.g., `ADD_PRODUCTS`, `ADD_PERSON`)
